@@ -4,3 +4,4 @@ logging:
   level:
     root: INFO
     org.springframework.mvc: DEBUG
+    org.springframework.web: DEBUG

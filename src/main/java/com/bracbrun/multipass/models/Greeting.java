@@ -1,4 +1,4 @@
-package com.bracbrun.multipass;
+package com.bracbrun.multipass.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
