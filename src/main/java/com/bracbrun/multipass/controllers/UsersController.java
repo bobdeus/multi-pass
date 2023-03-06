@@ -2,16 +2,14 @@ package com.bracbrun.multipass.controllers;
 
 import com.bracbrun.multipass.models.User;
 import com.bracbrun.multipass.services.UserService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
 @RequestMapping("api/v1")
 public class UsersController {
-
 
     private final UserService _userService;
 
@@ -22,5 +20,10 @@ public class UsersController {
     @GetMapping(value = "users")
     public List<User> getUsers() {
         return _userService.getUsers();
+    }
+
+    @PostMapping(value = "saveUser")
+    public User saveUser(@RequestBody @Validated User user) {
+        return _userService.saveUser(user);
     }
 }
