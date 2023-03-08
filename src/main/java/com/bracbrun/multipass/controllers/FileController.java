@@ -5,9 +5,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.val;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.Spliterator;
@@ -34,6 +32,13 @@ public class FileController {
                 .orElse(UUID.randomUUID().toString());
         val potentialFileName = request.getHeader(headerName);
         return potentialFileName == null ? headerName : potentialFileName;
+    }
+
+    @GetMapping(value = "file/{fileName}")
+    public ResponseEntity<Integer> processAndReturnFiles(@PathVariable String fileName, @RequestParam(defaultValue = "true") boolean synced) {
+        val result = _fileService.processFile(fileName, synced);
+
+        return ResponseEntity.ok(result);
     }
 
     @RequestMapping(path = "file", method = RequestMethod.POST, consumes = MediaType.APPLICATION_OCTET_STREAM_VALUE)
